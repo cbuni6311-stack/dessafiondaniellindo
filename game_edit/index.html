@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#111111">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Desvie dos Votos!</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+</head>
+<body>
+<div id="game">
+  <div id="hud">
+    <div><span id="score">0</span> m</div>
+    <div>❤️ <span id="lives">3</span></div>
+  </div>
+
+  <div id="startScreen" class="screen">
+    <h1>DESVIE DOS VOTOS!</h1>
+    <p>Chegue aos 2000 metros e encoste no troféu para vencer.</p>
+    <p><b>← →</b> ou <b>A D</b> para se mover</p>
+    <p class="mobileHint">No celular, use os botões na tela.</p>
+    <button id="startBtn">JOGAR</button>
+  </div>
+
+  <div id="trophy" aria-label="Trofeu">🏆</div>
+
+  <div id="player"><img src="player.png" alt="Player"></div>
+<div id="mobileControls" aria-label="Controles para celular">
+    <button id="leftBtn" type="button" aria-label="Mover para a esquerda">◀</button>
+    <button id="rightBtn" type="button" aria-label="Mover para a direita">▶</button>
+  </div>
+
+  <div id="winScreen" class="screen hidden">
+    <h1>Spencer Winnou, AME</h1>
+    <button id="restartBtn">JOGAR NOVAMENTE</button>
+  </div>
+
+  <div id="gameOverScreen" class="screen hidden">
+    <h1>Spencer Out 💔</h1>
+    <button id="retryBtn">TENTAR NOVAMENTE</button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

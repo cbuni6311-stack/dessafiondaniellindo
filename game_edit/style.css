@@ -1,0 +1,347 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #111;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+#game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100svh;
+  background:
+    linear-gradient(rgba(5, 10, 25, .08), rgba(5, 10, 25, .12)),
+    url("background.webp") center center / cover no-repeat;
+  overflow: hidden;
+  touch-action: none;
+}
+
+#hud {
+  position: absolute;
+  z-index: 50;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(700px, 90%);
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#player {
+  position: absolute;
+  z-index: 10;
+  width: 100px;
+  height: 145px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: left .08s linear, transform .15s;
+}
+
+#player img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+}
+
+.vote {
+  position: absolute;
+  z-index: 8;
+  width: 75px;
+  height: 75px;
+  background: #e63946;
+  border: 4px solid white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 900;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  animation: votePulse .6s infinite alternate;
+}
+
+@keyframes votePulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.screen {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.82);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.screen h1 {
+  font-size: clamp(35px, 7vw, 75px);
+  margin-bottom: 20px;
+  color: #ff4757;
+  text-shadow: 4px 4px #000;
+}
+
+.screen p {
+  font-size: 20px;
+  margin: 8px;
+}
+
+button {
+  margin-top: 30px;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4757;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #a51e2b;
+  transition: .15s;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  background: #ff6b81;
+}
+
+button:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  #hud { font-size: 18px; top: 12px; }
+.vote { width: 65px; height: 65px; font-size: 13px; }
+  #player { width: 98px; height: 136px; bottom: 54px; }
+  .screen p { font-size: 17px; }
+  .mobileHint { display: block !important; }
+}
+#mobileControls {
+  position: absolute;
+  z-index: 70;
+  left: 0;
+  right: 0;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  display: none;
+  justify-content: space-between;
+  padding: 0 18px;
+  padding-left: max(18px, env(safe-area-inset-left));
+  padding-right: max(18px, env(safe-area-inset-right));
+  pointer-events: none;
+}
+
+#mobileControls button {
+  pointer-events: auto;
+  margin: 0;
+  width: 72px;
+  height: 58px;
+  padding: 0;
+  border-radius: 14px;
+  background: rgba(0,0,0,.62);
+  border: 2px solid rgba(255,255,255,.75);
+  color: white;
+  font-size: 28px;
+  box-shadow: 0 4px 0 rgba(0,0,0,.5);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#mobileControls button:active {
+  transform: translateY(3px) scale(.97);
+  background: rgba(230,57,70,.85);
+}
+
+@media (max-width: 800px), (pointer: coarse) {
+  #mobileControls { display: flex; }
+}
+
+#trophy {
+  position: absolute;
+  z-index: 12;
+  display: none;
+  width: 86px;
+  height: 86px;
+  align-items: center;
+  justify-content: center;
+  font-size: 68px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,.55));
+  animation: trophyFadeIn 2s ease forwards, trophyPulse .7s 2s infinite alternate;
+  pointer-events: none;
+}
+
+#trophy.trophy-visible {
+  display: flex;
+}
+
+@keyframes trophyFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes trophyPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+
+@media (max-width: 600px) {
+  #trophy {
+    width: 78px;
+    height: 78px;
+    font-size: 62px;
+  }
+}
+
+
+.special {
+  position: absolute;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 900;
+  letter-spacing: 1px;
+  border: 4px solid white;
+  border-radius: 16px;
+  box-shadow: 0 5px 16px rgba(0,0,0,.55);
+  text-shadow: 2px 2px #000;
+  animation: specialPulse .55s infinite alternate;
+}
+
+.special.purge {
+  width: 95px;
+  height: 95px;
+  background: #111;
+  font-size: 18px;
+}
+
+.special.totem {
+  width: 82px;
+  height: 110px;
+  background: transparent;
+  color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+  overflow: visible;
+}
+
+.special.totem img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border: none;
+  background: transparent;
+}
+
+@keyframes specialPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+@media (max-width: 600px) {
+  .special.purge { width: 82px; height: 82px; font-size: 15px; }
+ .special.totem { width: 72px; height: 96px; font-size: 13px; }
+}
+
+
+/* Ajustes extras para celulares */
+@media (max-width: 800px) {
+  body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  #game {
+    width: 100%;
+    height: 100svh;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  #hud {
+    top: max(10px, env(safe-area-inset-top));
+    width: calc(100% - 28px);
+    font-size: clamp(16px, 5vw, 21px);
+  }
+
+  #mobileControls button {
+    width: clamp(64px, 19vw, 82px);
+    height: clamp(54px, 15vw, 68px);
+    font-size: clamp(25px, 8vw, 34px);
+  }
+
+  .screen {
+    padding: 24px 18px;
+  }
+
+  .screen h1 {
+    font-size: clamp(32px, 10vw, 52px);
+  }
+
+  .screen p {
+    max-width: 90vw;
+    font-size: clamp(15px, 4.5vw, 19px);
+  }
+
+  .screen button {
+    min-height: 52px;
+    padding: 13px 26px;
+    font-size: clamp(17px, 5vw, 21px);
+  }
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+  #player { bottom: 74px; }
+  #mobileControls { bottom: max(8px, env(safe-area-inset-bottom)); }
+  .screen { padding: 10px 20px; }
+  .screen h1 { margin-bottom: 8px; }
+  .screen p { margin: 4px; font-size: 14px; }
+  .screen button { margin-top: 10px; }
+}
+
+/* Totem de imunidade */
+.special.totem {
+  padding: 0;
+  overflow: hidden;
+  background: rgba(255,255,255,.08);
+}
+
+.special.totem img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}

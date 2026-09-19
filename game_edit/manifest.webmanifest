@@ -1,0 +1,10 @@
+{
+  "name": "Desvie dos Votos!",
+  "short_name": "Desvie dos Votos",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": []
+}
